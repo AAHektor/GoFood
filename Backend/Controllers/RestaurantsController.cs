@@ -30,5 +30,18 @@ namespace Backend.Controllers
 
             return CreatedAtAction(nameof(GetRestaurants), new { id = restaurant.Id }, restaurant);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Restaurant>> GetRestaurants(int id)
+        {
+            var restaurant = await _context.Restaurants.FindAsync(id);
+
+            if (restaurant == null)
+            {
+                return NotFound();
+            }
+
+            return restaurant;
+        }
     }
 }
