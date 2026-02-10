@@ -3,6 +3,7 @@ import RestaurantList from '../components/RestaurantList'
 
 import avatarIcon from '../assets/avatar.svg'
 import SearchIcon from '../components/icons/SearchIcon'
+import QuickFilter from '../components/QuickFilter'
 
 const Discovery = () => {
   return (
@@ -27,6 +28,8 @@ const Discovery = () => {
                 <input type="text" placeholder='What are you craving?'className='bg-transparent outline-none w-full text-gray-700 placeholder-green-900/60'/>
             </div>
         </div>
+
+        <QuickFilter />
 
         <main className='flex-1 px-4 pt-4'>
             <h2 className='text-lg font-bold'>Nearby Favorites</h2>

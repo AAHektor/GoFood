@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Side_Projects\\GoFood\\backend\\backend.csproj": {}
+    "E:\\Side_Projects\\GoFood\\Backend\\backend.csproj": {}
   },
   "projects": {
-    "E:\\Side_Projects\\GoFood\\backend\\backend.csproj": {
+    "E:\\Side_Projects\\GoFood\\Backend\\backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Side_Projects\\GoFood\\backend\\backend.csproj",
+        "projectUniqueName": "E:\\Side_Projects\\GoFood\\Backend\\backend.csproj",
         "projectName": "backend",
-        "projectPath": "E:\\Side_Projects\\GoFood\\backend\\backend.csproj",
+        "projectPath": "E:\\Side_Projects\\GoFood\\Backend\\backend.csproj",
         "packagesPath": "C:\\Users\\aronh\\.nuget\\packages\\",
-        "outputPath": "E:\\Side_Projects\\GoFood\\backend\\obj\\",
+        "outputPath": "E:\\Side_Projects\\GoFood\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
