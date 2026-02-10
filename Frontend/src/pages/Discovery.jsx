@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import RestaurantList from '../components/RestaurantList'
 
 import avatarIcon from '../assets/avatar.svg'
@@ -6,6 +6,9 @@ import SearchIcon from '../components/icons/SearchIcon'
 import QuickFilter from '../components/QuickFilter'
 
 const Discovery = () => {
+
+    const [activeCategory, setActiveCategory] = useState('popular');
+
   return (
     <div className='min-h-screen flex flex-col bg-gray-100'>
 
@@ -29,11 +32,11 @@ const Discovery = () => {
             </div>
         </div>
 
-        <QuickFilter />
+        <QuickFilter activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
 
         <main className='flex-1 px-4 pt-4'>
             <h2 className='text-lg font-bold'>Nearby Favorites</h2>
-            <RestaurantList />
+            <RestaurantList selectedCategory={activeCategory} />
         </main>
     </div>
   )

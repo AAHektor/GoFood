@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using Backend.Data;
 using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +43,21 @@ namespace Backend.Controllers
             }
 
             return restaurant;
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteRestaurant(int id)
+        {
+            var restaurant = await _context.Restaurants.FindAsync(id);
+            if (restaurant == null)
+            {
+                return NotFound();
+            }
+
+            _context.Restaurants.Remove(restaurant);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }

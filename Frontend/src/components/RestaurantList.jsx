@@ -1,24 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const RestaurantList = () => {
+const RestaurantList = ({ selectedCategory }) => {
     const [restaurants, setRestaurants] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    
     useEffect(() => {
         fetch("http://localhost:5291/api/Restaurants")
-            .then((response) => response.json())
-            .then((data) => {
-                console.log("Hämtade restauranger:", data);
-                setRestaurants(data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.error("Kunde inte hämta data:", error);
-                setLoading(false);
-            });
+        .then((response) => response.json())
+        .then((data) => {
+            console.log("Hämtade restauranger:", data);
+            setRestaurants(data);
+            setLoading(false);
+        })
+        .catch((error) => {
+            console.error("Kunde inte hämta data:", error);
+            setLoading(false);
+        });
     }, []);
 
+    const filterRestaurants = restaurants.filter((restaurant) => {
+        if (selectedCategory === 'popular') return restaurant.isPopular === true;
+
+        return restaurant.category?.toLowerCase() == selectedCategory.toLowerCase();
+    });
+    
     if (loading) {
         return (
             <p className="text-center text-gray-500">Laddar restauranger...</p>
@@ -27,7 +34,7 @@ const RestaurantList = () => {
 
     return (
         <div className="flex flex-col gap-4">
-            {restaurants.map((restaurant) => (
+            {filterRestaurants.map((restaurant) => (
                 <div
                     key={restaurant.id}
                     className="rounded-3xl overflow-hidden"

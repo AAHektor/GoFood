@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 const categories = [
     {id: 'popular', name: 'Populärt' },
@@ -10,9 +10,8 @@ const categories = [
     {id: 'dessert', name: 'Efterrätt'},
 ];
 
-const QuickFilter = () => {
+const QuickFilter = ({ activeCategory, setActiveCategory}) => {
 
-    const [activeCategory, setActiveCategory] = useState('popular');
 
   return (
     <div className='px-4 py-2 flex gap-4 overflow-x-auto scrollbar-hide'>
@@ -22,7 +21,7 @@ const QuickFilter = () => {
                 onClick={ () => setActiveCategory(category.id)}
 
                 className={`
-                        px-6 py-3 rounded-full text-sm font-bold outline-1 outline-slate-200 transition-all duration-300 ease-in-out
+                        px-6 py-3 rounded-full text-sm font-bold outline-1 outline-slate-200/60 transition-all duration-300 ease-in-out
                         ${activeCategory === category.id
                             ? 'bg-green-600 text-white shadow-2xl shadow-green-600 outline-none'
                             : 'bg-white text-gray-700'
