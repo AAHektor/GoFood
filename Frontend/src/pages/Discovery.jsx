@@ -4,6 +4,7 @@ import RestaurantList from '../components/RestaurantList'
 import avatarIcon from '../assets/avatar.svg'
 import SearchIcon from '../components/icons/SearchIcon'
 import QuickFilter from '../components/QuickFilter'
+import BottomNav from '../components/BottomNav'
 
 const Discovery = () => {
 
@@ -35,9 +36,11 @@ const Discovery = () => {
         <QuickFilter activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
 
         <main className='flex-1 px-4 pt-4'>
-            <h2 className='text-lg font-bold'>Nearby Favorites</h2>
+            <h2 className='text-xl font-bold pb-2'>Nearby Favorites</h2>
             <RestaurantList selectedCategory={activeCategory} />
         </main>
+
+        <BottomNav />
     </div>
   )
 }

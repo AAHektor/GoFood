@@ -33,11 +33,12 @@ const RestaurantList = ({ selectedCategory }) => {
     }
 
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 pb-20">
             {filterRestaurants.map((restaurant) => (
-                <div
+                <Link 
+                    to={`/restaurant/${restaurant.id}`}
                     key={restaurant.id}
-                    className="rounded-3xl overflow-hidden"
+                    className="rounded-3xl overflow-hidden outline-1 outline-slate-200/50"
                 >
                     <div>
                         <img
@@ -52,12 +53,12 @@ const RestaurantList = ({ selectedCategory }) => {
                         />
                     </div>
                     <div className="p-3 bg-white">
-                        <h3>{restaurant.name}</h3>
+                        <h3 className="font-bold">{restaurant.name}</h3>
                         <p>{restaurant.address}</p>
 
-                        <Link to={`/restaurant/${restaurant.id}`}>Se Meny</Link>
+                      
                     </div>
-                </div>
+                </Link>
             ))}
         </div>
     );
