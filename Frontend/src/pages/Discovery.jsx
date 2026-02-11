@@ -32,7 +32,7 @@ const Discovery = () => {
                 </div>
                 <input type="text" placeholder='What are you craving?'className='bg-transparent outline-none w-full text-gray-700 placeholder-green-900/60'/>
                 <button className=''>
-                    <FilterIcon className="w-6 h-6 relative right-2" />
+                    <FilterIcon className="w-6 h-6 relative right-2 text-gray-500" />
                 </button>
             </div>
         </div>
