@@ -62,7 +62,10 @@ const RestaurantList = ({ selectedCategory }) => {
                             />
                         </div>
                         <div className="p-3 bg-white">
-                            <h3 className="font-bold text-lg">{restaurant.name}</h3>
+                            <div>
+                                <h3 className="font-bold text-lg">{restaurant.name}</h3>
+                                <span></span>
+                            </div>
                             <p>{restaurant.address}</p>
                         </div>
                         <div className=" bg-white px-4">
