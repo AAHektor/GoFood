@@ -33,5 +33,22 @@ namespace backend.Controllers
             await _context.SaveChangesAsync();
             return Ok(menuItem);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteMenuItem(int id)
+        {
+          var menuItem = await _context.MenuItems.FindAsync(id);
+          if (menuItem == null)
+            {
+                return NotFound();
+            }
+            
+            _context.MenuItems.Remove(menuItem);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+
+        }
+
     }
 }
