@@ -65,13 +65,20 @@ const RestaurantMenu = () => {
                 ) : (
                     menuItems.map((item) => (
                         <div key={item.id}>
-                            <div>
-                                <h3>{item.name}</h3>
-                                <p>{item.description}</p>
-                                <p>{item.price}</p>
+                            <div className='grid grid-cols-5 items-center gap-5'>
+                                <div className='flex flex-col col-span-3'>
+                                    <h3 className='font-semibold text-[16px] pb-1'>{item.name}</h3>
+                                    <p className='text-[15px] font-light line-clamp-2 text-slate-500'>{item.description}</p>
+                                    <p className='text-green-600/70 font-semibold'>{item.price}sek</p>
+                                </div>
+                                <div className='col-span-2 flex justify-end'>
+                                    <div className='h-30 w-30 shadow-sm rounded-2xl overflow-hidden border border-gray-100'>
+                                        <img src={item.imageUrl} alt="" className='h-full w-full object-cover' />
+                                    </div>
+                                </div>
                             </div>
                             <button>
-                                lägg till i varukorgen
+                                varukorg
                             </button>
                         </div>
                     ))
