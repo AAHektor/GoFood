@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 using Backend.Data;
 using Backend.Models;
+using Backend.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -138,6 +139,39 @@ namespace Backend.Controllers
         public async Task<ActionResult<IEnumerable<Label>>> GetAllLabels() {
             return await _context.Labels.ToListAsync();
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateRestaurant(int id, UpdateRestaurantDto updateDto) {
+
+            var restaurant = await _context.Restaurants.FindAsync(id);
+            if (restaurant == null)
+            {
+                return NotFound();
+            }
+
+            if (updateDto.Name != null) {
+                restaurant.Name = updateDto.Name;
+            }
+
+            if (updateDto.Address != null) {
+                restaurant.Address = updateDto.Address;
+            }
+
+            if(updateDto.City != null) {
+                restaurant.City = updateDto.City;
+            }
+
+            if(updateDto.ImageUrl != null) {
+                restaurant.ImageUrl = updateDto.ImageUrl;
+            }
+
+            if(updateDto.Category != null) {
+                restaurant.Category = updateDto.Category;
+            }
+
+            await _context.SaveChangesAsync();
+            return NoContent();
+        } 
         
     }
 }

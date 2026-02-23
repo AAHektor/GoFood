@@ -12,7 +12,7 @@ const Discovery = () => {
     const [activeCategory, setActiveCategory] = useState('popular');
 
   return (
-    <div className='min-h-screen flex flex-col bg-gray-100'>
+    <div className='min-h-screen flex flex-col bg-gray-200/50'>
 
         <div className='bg-white p-4'>
             <div className='w-full flex justify-between pb-5'>

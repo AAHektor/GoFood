@@ -60,8 +60,8 @@ const RestaurantCard = ({ restaurant }) => {
                 <div className="flex flex-wrap gap-1.5 mb-2">
                     {restaurant.labels.map((label) => (
                         <div key={label.id} className="flex items-center gap-2">
-                            <DotIcon className='w-2 h-2 text-gray-500' />
-                            <span className='text-slate-500 text-[14px] font-medium'>
+                            <DotIcon className='w-2 h-2 text-gray-300' />
+                            <span className=' text-green-900/60 text-[14px] font-semibold'>
                                 {label.name}
                             </span>
                         </div>
