@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import ArrowLeftIcon from "../components/icons/ArrowLeftIcon";
+import AddToCartIcon from "../components/icons/AddToCartIcon";
 
 const RestaurantMenu = () => {
     const { id } = useParams();
@@ -64,7 +65,7 @@ const RestaurantMenu = () => {
             </div>
 
             <div className="px-4 py-4">
-                <div>
+                <div className="flex flex-col gap-8">
                     {menuItems.length === 0 ? (
                         <p>Ingen meny hittades (eller laddar...)</p>
                     ) : (
@@ -79,10 +80,10 @@ const RestaurantMenu = () => {
                                             {item.description}
                                         </p>
                                         <p className="text-green-600/70 font-semibold">
-                                            {item.price}sek
+                                            {item.price},00kr
                                         </p>
                                     </div>
-                                    <div className="col-span-2 flex justify-end">
+                                    <div className="relative col-span-2 flex justify-end">
                                         <div className="h-30 w-30 shadow-sm rounded-2xl overflow-hidden border border-gray-100">
                                             <img
                                                 src={item.imageUrl}
@@ -90,14 +91,15 @@ const RestaurantMenu = () => {
                                                 className="h-full w-full object-cover"
                                             />
                                         </div>
+                                        <button
+                                            className=""
+                                            onClick={() => addToCart(item)}
+                                        >
+                                            <AddToCartIcon className="absolute z-10 -right-2 -bottom-2 w-10 h-10 text-gray-700 shadow-md rounded-full" />
+                                        </button>
                                     </div>
                                 </div>
-                                <button
-                                    className=""
-                                    onClick={() => addToCart(item)}
-                                >
-                                    lägg till i varukorg
-                                </button>
+                                
                             </div>
                         ))
                     )}
