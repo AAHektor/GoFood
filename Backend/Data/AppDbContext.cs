@@ -15,4 +15,5 @@ public class AppDbContext : DbContext
     public DbSet<Restaurant> Restaurants { get; set; }
     public DbSet<MenuItem> MenuItems { get; set; }
     public DbSet<Order> Orders { get; set; }
+    public DbSet<Label> Labels { get; set; }
 }
