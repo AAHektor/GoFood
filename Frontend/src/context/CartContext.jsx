@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createContext, useState, useMemo } from "react";
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -6,8 +6,23 @@ export const CartContext = createContext(null);
 
 
 export const CartProvider = ({ children }) => {
-    const [items, setItems] = useState([]);
-    const [activeRestaurantId, setActiveRestaurantId] = useState(null);
+    const [items, setItems] = useState(() => {
+        try {
+            const saved = localStorage.getItem("cart");
+            return saved ? (JSON.parse(saved).items || []) : [];
+        } catch {
+            return [];
+        }
+    });
+
+    const [activeRestaurantId, setActiveRestaurantId] = useState(() => {
+        try {
+            const saved = localStorage.getItem("cart");
+            return saved ? (JSON.parse(saved).activeRestaurantId || null) : null;
+        } catch {
+            return null;
+        }
+    })
 
     const addItem = (item, restaurantId) => {
         if (activeRestaurantId && activeRestaurantId !== restaurantId) {
@@ -60,6 +75,10 @@ export const CartProvider = ({ children }) => {
         );
         return { totalItems, totalPrice };
     }, [items]);
+
+    useEffect(() =>  {
+        localStorage.setItem("cart", JSON.stringify({ items, activeRestaurantId }));
+    }, [items, activeRestaurantId]);
 
     return (
         <CartContext.Provider

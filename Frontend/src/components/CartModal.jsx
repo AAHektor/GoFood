@@ -1,5 +1,6 @@
 import React, { useEffect ,useState } from 'react'
 import { useCart } from '../context/useCart';
+import ArrowLeftIcon from '../components/icons/ArrowLeftIcon';
 
 const CartModal = ({ onClose }) => {
     const { items, totalPrice, setItemQuantity, removeItem } = useCart();
@@ -21,13 +22,13 @@ const CartModal = ({ onClose }) => {
             `}>
             
             <div className='flex justify-between items-center mb-6'>
-                <h2 className='text-2xl font-bold'>Kundvagn</h2>
                 <button 
                   onClick={handleClose} 
-                  className='text-gray-500 hover:text-gray-700 text-3xl font-light'
+                  className='w-10 h-10 text-gray-500 bg-gray-200 outline outline-gray-200 rounded-full text-3xl font-light justify-center items-center flex'
                 >
-                  ×
+                  <ArrowLeftIcon className="w-6 h-6" />
                 </button>
+                <h2 className='text-2xl font-bold'>Din Order</h2>
             </div>
 
             {items.length === 0 ? (
@@ -36,7 +37,7 @@ const CartModal = ({ onClose }) => {
                 <>
                     <div className='space-y-4 mb-6'> 
                         {items.map((item) => (
-                            <div key={item.key} className="flex items-center justify-between pb-4 border-b">
+                            <div key={item.key} className="flex items-center justify-between pb-4">
                                 <div className='flex-1'>
                                     <h3 className='font-semibold text-[16px]'>{item.name}</h3>
                                     <p className='text-green-600 font-semibold'>{item.price}kr</p>
@@ -66,7 +67,7 @@ const CartModal = ({ onClose }) => {
                         ))}
                     </div>
 
-                    <div className='border-t-2 pt-4 mb-6'>
+                    <div className='border-t-2 border-gray-300 pt-4 mb-6'>
                         <div className='flex justify-between items-center'>
                             <span className='text-lg font-semibold'>Totalt:</span>
                             <span className='text-2xl font-bold text-green-600'>{totalPrice}kr</span>
