@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useCart } from "../context/useCart";
+import CartModal from "./CartModal";
 
 import ArrowLeftIcon from "../components/icons/ArrowLeftIcon";
 import AddToCartIcon from "../components/icons/AddToCartIcon";
 
 const RestaurantMenu = () => {
+    const [showCart, setShowCart] = useState(false);
     const { id } = useParams();
     const { addItem, totalItems, totalPrice } = useCart();
     const [menuItems, setMenuItems] = useState([]);
@@ -111,12 +113,18 @@ const RestaurantMenu = () => {
             </div>
 
             <div className="fixed z-15 bottom-4 left-1/2 -translate-x-1/2 px-4 w-full">
-                <button className="w-full text-white bg-red-400 h-14 rounded-full font-semibold justify-between flex px-6 items-center">
+                <button 
+                onClick={() => setShowCart(true)}
+                className="w-full text-white bg-red-400 h-14 rounded-full font-semibold justify-between flex px-6 items-center">
                     <span className="rounded-full h-10 w-10 justify-center items-center flex bg-red-500">{totalItems}</span>
                     <span>View Order</span>
                     <span>{totalPrice}</span>
                 </button>
             </div>
+
+            {showCart && (
+                <CartModal onClose={() => setShowCart(false)} />
+            )}
         </div>
     );
 };
