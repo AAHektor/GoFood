@@ -5,6 +5,7 @@ import DeliveryIcon from '../components/icons/DeliveryIcon'
 
 import HeartIcon from '../components/icons/HeartIcon'
 import StarIcon from '../components/icons/StarIcon'
+import DotIcon from '../components/icons/DotIcon'
 
 
 const RestaurantCard = ({ restaurant }) => {
@@ -57,10 +58,14 @@ const RestaurantCard = ({ restaurant }) => {
             </div>
             {restaurant.labels && restaurant.labels.length > 0 && (
                 <div className="flex flex-wrap gap-1.5 mb-2">
-                    {restaurant.labels.split(',').map((label, index) => (
-                        <span key={index} className="px-2.5 py-1 bg-blue-100/80 text-blue-700 text-xs font-medium rounded-full">
-                            {label.trim()}
-                        </span>
+                    {restaurant.labels.map((label) => (
+                        <div key={label.id} className="flex items-center gap-2">
+                            <DotIcon className='w-2 h-2 text-gray-500' />
+                            <span className='text-slate-500 text-[14px] font-medium'>
+                                {label.name}
+                            </span>
+                        </div>
+
                     ))}
                 </div>
             )}
