@@ -64,7 +64,7 @@ const RestaurantMenu = () => {
                 <p className="text-gray-500">{restaurant?.address}</p>
             </div>
 
-            <div className="px-4 py-4">
+            <div className="px-4 py-4 pb-24">
                 <div className="flex flex-col gap-8">
                     {menuItems.length === 0 ? (
                         <p>Ingen meny hittades (eller laddar...)</p>
@@ -104,6 +104,14 @@ const RestaurantMenu = () => {
                         ))
                     )}
                 </div>
+            </div>
+
+            <div className="fixed z-15 bottom-4 left-1/2 -translate-x-1/2 px-4 w-full">
+                <button className="w-full text-white bg-red-400 h-14 rounded-full font-semibold justify-between flex px-6 items-center">
+                    <span className="rounded-full h-10 w-10 justify-center items-center flex bg-red-500">2</span>
+                    <span>View Order</span>
+                    <span>120kr</span>
+                </button>
             </div>
         </div>
     );
