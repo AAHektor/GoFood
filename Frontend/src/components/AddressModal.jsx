@@ -35,7 +35,8 @@ const AddressModal = ({ isOpen, onClose, currentAddress, onSave }) => {
             <div
                 className={`w-full bg-white p-6 rounded-lg max-w-md mx-auto transition-transform duration-300 ease-in-out
                 ${isAnimating ? "translate-y-0" : "translate-y-full"}
-            `}
+                `}
+                onClick={(e) => e.stopPropagation()}
             >
 
                 <button onClick={handleClose} className="bg-gray-200 flex w-10 h-10 justify-center items-center rounded-full mb-4">
