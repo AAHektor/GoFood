@@ -6,10 +6,18 @@ import SearchIcon from '../components/icons/SearchIcon'
 import QuickFilter from '../components/QuickFilter'
 import BottomNav from '../components/BottomNav'
 import FilterIcon from '../components/icons/FilterIcon'
+import GoIcon from '../components/icons/GoIcon'
 
 const Discovery = () => {
 
     const [activeCategory, setActiveCategory] = useState('popular');
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleCategoryChange = (category) => {
+        setIsLoading(true);
+        setActiveCategory(category);
+        setTimeout(() => setIsLoading(false), 500);
+    }
 
   return (
     <div className='min-h-screen flex flex-col bg-gray-200/50'>
@@ -37,11 +45,22 @@ const Discovery = () => {
             </div>
         </div>
 
-        <QuickFilter activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+        <QuickFilter activeCategory={activeCategory} setActiveCategory={handleCategoryChange} />
 
         <main className='flex-1 px-4 pt-4'>
             <h2 className='text-xl font-bold pb-2'>Nearby Favorites</h2>
-            <RestaurantList selectedCategory={activeCategory} />
+
+            {isLoading ? (
+                <div className='flex justify-center items-center py-12'> 
+                    <div className='flex justify-center items-center py-12'>
+                        <GoIcon className="w-40 h-auto animate-ping" />
+                    </div>
+                </div>
+            ) : (
+                <div className='animate-fadeIn'>
+                    <RestaurantList selectedCategory={activeCategory} />
+                </div>
+            )}
         </main>
 
         <BottomNav />
