@@ -23,6 +23,10 @@ const CartModal = ({ onClose }) => {
         setTimeout(() => onClose(), 300);
     };
 
+    // mockdata för service fee & leveransavgift, kommer att ersättas med riktiga beräkningar senare
+    const serviceFee = 10;
+    const deliveryFee = 49;
+
   return (
     <div className='fixed inset-0 bg-black/50 flex items-end z-50'>
         <div className={`bg-white w-full h-full p-6 max-h-screen overflow-y-auto flex flex-col
@@ -88,7 +92,29 @@ const CartModal = ({ onClose }) => {
                                 <p className='text-black font-semibold'>{item.price * item.quantity}kr</p>
                             </div>
                         ))}
+                        <div className='pb-4'>
+                            <p className='font-semibold pb-4'>Översikt</p>
+                            <div className='flex flex-col gap-1 border border-gray-300 p-4 rounded-3xl shadow-sm'>
+                                <div className='flex justify-between'>
+                                    <p className='text-sm text-slate-500'>Subtotal</p>
+                                    <p>{totalPrice}kr</p>
+                                </div>
+                                <div className='flex justify-between'>
+                                    <p className='text-sm text-slate-500'>Leverans Avgift</p>
+                                    <p>{deliveryFee}kr</p>
+                                </div>
+                                <div className='flex justify-between'>
+                                    <p className='text-sm text-slate-500'>Service Avgift</p>
+                                    <p>{serviceFee}kr</p>
+                                </div>
+                                <div className='flex justify-between border-t border-gray-200 pt-2 mt-2'>
+                                    <p className='font-semibold'>Total</p>
+                                    <p>{totalPrice + (deliveryFee + serviceFee)}kr</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
 
                     <div className="border-t border-gray-300 py-4">
 
@@ -96,7 +122,7 @@ const CartModal = ({ onClose }) => {
                             flex justify-between items-center px-6
                         '>
                             <span>Gå till checkout</span>
-                            <span className='border-l pl-4 text-xl font-bold text-white'>{totalPrice}kr</span>
+                            <span className='border-l pl-4 text-xl font-bold text-white'>{totalPrice + (deliveryFee + serviceFee)}kr</span>
                         </button>
                     </div>
 

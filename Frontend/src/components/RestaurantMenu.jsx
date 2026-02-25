@@ -8,7 +8,7 @@ import ArrowLeftIcon from "../components/icons/ArrowLeftIcon";
 import AddToCartIcon from "../components/icons/AddToCartIcon";
 
 const RestaurantMenu = () => {
-    const [showCart, setShowCart] = useState(false);
+    const [showCart, setShowCart] = useState(true);
     const { id } = useParams();
     const { addItem, clearCart, totalItems, totalPrice, activeRestaurantName } = useCart();
     const [menuItems, setMenuItems] = useState([]);
