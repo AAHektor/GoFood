@@ -2,24 +2,28 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useCart } from "../context/useCart";
 import CartModal from "./CartModal";
+import ConfirmSwitchModal from "./ConfirmSwitchModal";
 
 import ArrowLeftIcon from "../components/icons/ArrowLeftIcon";
 import AddToCartIcon from "../components/icons/AddToCartIcon";
 
 const RestaurantMenu = () => {
-    const [showCart, setShowCart] = useState(true);
+    const [showCart, setShowCart] = useState(false);
     const { id } = useParams();
-    const { addItem, totalItems, totalPrice } = useCart();
+    const { addItem, clearCart, totalItems, totalPrice, activeRestaurantName } = useCart();
     const [menuItems, setMenuItems] = useState([]);
     const [restaurant, setRestaurant] = useState(null);
-    const [error, setError] = useState(null);
+
+    const [showConfirmSwitch, setShowConfirmSwitch] = useState(false);
+    const [pendingItem, setPendingItem] = useState(null);
 
     const addToCart = (item) => {
         const result = addItem(item, id, restaurant?.name);
         if (result === false) {
-            setError("Du har redan varor i din kundvagn från en annan restaurang. Rensa kundvagnen för att fortsätta.");
-            setTimeout(() => setError(null), 4000);
-            }
+            setPendingItem(item);
+            setShowConfirmSwitch(true);
+        }
+        
     };
 
     useEffect(() => {
@@ -42,16 +46,27 @@ const RestaurantMenu = () => {
             .catch((err) => console.error(err));
     }, [id]);
 
+    const handleConfirmSwitch = () => {
+        clearCart();
+        addItem(pendingItem, id, restaurant?.name);
+        setShowConfirmSwitch(false);
+        setPendingItem(null);
+    };
+
+    const handleCancelSwitch = () => {
+        setShowConfirmSwitch(false);
+        setPendingItem(null);
+    };
+
     return (
         <>
-            {error && (
-                <div className="fixed top-4 left-4 right-4 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-4 rounded-lg shadow-lg z-40 flex items-center gap-3 animate-slideDown">
-                    <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                    </svg>
-                    <span className="font-medium text-sm">{error}</span>
-                </div>
-            )}
+            <ConfirmSwitchModal
+                isOpen={showConfirmSwitch}
+                currentRestaurant={activeRestaurantName}
+                newRestaurant={restaurant?.name}
+                onConfirm={handleConfirmSwitch}
+                onCancel={handleCancelSwitch}
+            />
 
             <div>
                 <div className="relative h-64 w-full overflow-hidden">
