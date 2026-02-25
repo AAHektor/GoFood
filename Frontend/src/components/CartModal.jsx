@@ -48,31 +48,38 @@ const CartModal = ({ onClose }) => {
                     <div className='flex-1 overflow-y-auto space-y-4 mb-6'> 
                         {items.map((item) => (
                             <div key={item.key} className="flex items-center justify-between pb-4">
-                                <div className='flex-1'>
+                                {item.imageUrl && (
+                                    <div className='h-20 w-20 rounded-3xl overflow-hidden border border-gray-200 mr-4'>
+                                        <img src={item.imageUrl} alt={item.name} className='h-full w-full object-cover' />
+                                    </div>
+                                )}
+                                <div className='flex flex-col flex-1 gap-4'>
                                     <h3 className='font-semibold text-[16px]'>{item.name}</h3>
-                                    <p className='text-green-600 font-semibold'>{item.price}kr</p>
+                                    <div className='flex items-center gap-3'>
+                                        <div className='flex items-center justify-center bg-gray-200 px-1 py-1 rounded-full'>
+                                            <button 
+                                            onClick={() => setItemQuantity(item.key, item.quantity - 1)}
+                                            className='w-8 h-8 rounded-full bg-white hover:bg-gray-200 flex items-center justify-center font-semibold'
+                                            >
+                                            −
+                                            </button>
+                                            <span className="w-6 text-center font-semibold">{item.quantity}</span>
+                                            <button 
+                                            onClick={() => setItemQuantity(item.key, item.quantity + 1)}
+                                            className='w-8 h-8 rounded-full bg-white hover:bg-gray-200 flex items-center justify-center font-semibold'
+                                            >
+                                            +
+                                            </button>
+                                        </div>
+                                        <button 
+                                        onClick={() => removeItem(item.key)} 
+                                        className="ml-4 text-red-500 hover:text-red-700 font-semibold"
+                                        >
+                                        <TrashIcon className="w-6 h-6 text-slate-700" />
+                                        </button>
+                                    </div>
                                 </div>
-                                <div className='flex items-center gap-3'>
-                                    <button 
-                                    onClick={() => setItemQuantity(item.key, item.quantity - 1)}
-                                    className='w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center font-semibold'
-                                    >
-                                    −
-                                    </button>
-                                    <span className="w-6 text-center font-semibold">{item.quantity}</span>
-                                    <button 
-                                    onClick={() => setItemQuantity(item.key, item.quantity + 1)}
-                                    className='w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center font-semibold'
-                                    >
-                                    +
-                                    </button>
-                                    <button 
-                                    onClick={() => removeItem(item.key)} 
-                                    className="ml-4 text-red-500 hover:text-red-700 font-semibold"
-                                    >
-                                    <TrashIcon className="w-6 h-6 text-slate-700" />
-                                    </button>
-                                </div>
+                                <p className='text-green-600 font-semibold'>{item.price * item.quantity}kr</p>
                             </div>
                         ))}
                     </div>
