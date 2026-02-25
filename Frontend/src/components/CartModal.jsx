@@ -124,7 +124,7 @@ const CartModal = ({ onClose }) => {
                 <p className='text-gray-500 text-center py-8'>Din kundvagn är tom</p>
             ) : (
                 <> 
-                    <div className='flex-1 overflow-y-auto space-y-4 mb-6'> 
+                    <div className={`flex-1 overflow-y-auto space-y-4 ${!orderConfirmed ? 'pb-20' : ''}`}> 
                         
 
                         {orderConfirmed ? (
@@ -231,23 +231,26 @@ const CartModal = ({ onClose }) => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="border-t border-gray-300 py-4">
-
-                                    <button 
-                                    className='w-full bg-red-400 text-white py-3 rounded-full font-semibold hover:bg-red-500 transition
-                                        flex justify-between items-center px-6
-                                    '
-                                    onClick={handleConfirmOrder}
-                                    disabled={isLoading}
-                                    >
-                                        <span>Beställ</span>
-                                        <span className='border-l pl-4 text-xl font-bold text-white'>{totalPrice + (deliveryFee + serviceFee)}kr</span>
-                                    </button>
-                                </div>
                             </>
                         )}
+
                         
                     </div>
+                    {!orderConfirmed && (
+                        <div className="fixed bottom-0 left-0 w-full px-6 z-20 bg-white py-4">
+
+                        <button 
+                        className='w-full bg-red-400 text-white h-12 rounded-full font-semibold hover:bg-red-500 transition
+                            flex justify-between items-center px-6
+                        '
+                        onClick={handleConfirmOrder}
+                        disabled={isLoading}
+                        >
+                            <span>Beställ</span>
+                            <span className='border-l pl-4 text-xl font-bold text-white'>{totalPrice + (deliveryFee + serviceFee)}kr</span>
+                        </button>
+                    </div>    
+                    )}
 
                 </>
             )}

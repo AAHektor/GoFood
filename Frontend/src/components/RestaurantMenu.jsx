@@ -142,10 +142,10 @@ const RestaurantMenu = () => {
                 <div className="fixed z-15 bottom-4 left-1/2 -translate-x-1/2 px-4 w-full">
                     <button 
                     onClick={() => setShowCart(true)}
-                    className="w-full text-white bg-red-400 h-14 rounded-full font-semibold justify-between flex px-6 items-center">
-                        <span className="rounded-full h-10 w-10 justify-center items-center flex bg-red-500">{totalItems}</span>
+                    className="w-full text-white bg-red-400 h-12 rounded-full font-semibold justify-between flex px-6 items-center">
+                        <span className="rounded-full h-8 w-8 justify-center items-center flex bg-red-500">{totalItems}</span>
                         <span>View Order</span>
-                        <span>{totalPrice}</span>
+                        <span className="border-l pl-4 text-xl font-bold text-white">{totalPrice}kr</span>
                     </button>
                 </div>
 
