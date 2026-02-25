@@ -30,6 +30,14 @@ const Discovery = () => {
         localStorage.setItem('deliveryAddress', newAddress);
     };
 
+    const categoryTitles = {
+        popular: 'Trendiga restauranger',
+        pizza: 'Pizzor nära dig',
+        sushi: 'Allt om sushi',
+        burger: 'Burgare du älskar',
+        healthy: 'Hälsosamma alternativ',
+    }
+
   return (
     <div className='min-h-screen flex flex-col bg-gray-200/50'>
 
@@ -61,7 +69,9 @@ const Discovery = () => {
         <QuickFilter activeCategory={activeCategory} setActiveCategory={handleCategoryChange} />
 
         <main className='flex-1 px-4 pt-4'>
-            <h2 className='text-xl font-bold pb-2'>Nearby Favorites</h2>
+            <h2 className='text-xl font-bold pb-2'>
+                {categoryTitles[activeCategory] || 'Restauranger'}
+            </h2>
 
             {isLoading ? (
                 <div className='flex justify-center items-center py-12'> 
