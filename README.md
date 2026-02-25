@@ -42,6 +42,7 @@ dotnet run
 
 ### Screenshots
 ![Discovery page](screenshots/Discovery.png)
+![Update Address](screenshots/UpdateAddress.png)
 ![Restaurant menu](screenshots/RestaurantMenu.png)
 ![Cart modal](screenshots/YourOrder.png)
-![Update Address](screenshots/UpdateAddress.png)
+![Order Confirmation](screenshots/OrderConfirmation.png)
