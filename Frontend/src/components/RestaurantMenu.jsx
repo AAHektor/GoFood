@@ -144,7 +144,7 @@ const RestaurantMenu = () => {
                     onClick={() => setShowCart(true)}
                     className="w-full text-white bg-red-400 h-12 rounded-full font-semibold justify-between flex px-6 items-center">
                         <span className="rounded-full h-8 w-8 justify-center items-center flex bg-red-500">{totalItems}</span>
-                        <span>View Order</span>
+                        <span>Min Order</span>
                         <span className="border-l pl-4 text-xl font-bold text-white">{totalPrice}kr</span>
                     </button>
                 </div>
