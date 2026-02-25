@@ -39,3 +39,9 @@ npm run dev
 cd Backend
 dotnet run
 ```
+
+### Screenshots
+![Discovery page](screenshots/Discovery.png)
+![Restaurant menu](screenshots/RestaurantMenu.png)
+![Cart modal](screenshots/YourOrder.png)
+![Update Address](screenshots/UpdateAddress.png)
