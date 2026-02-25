@@ -28,11 +28,14 @@ For now only mobile responsive.
 ## Getting Started
 
 ### Frontend
+```bash
 cd Frontend
 npm install
 npm run dev
+```
 
 ### Backend
 ```bash
 cd Backend
 dotnet run
+```
