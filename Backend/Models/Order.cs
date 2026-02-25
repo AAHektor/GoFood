@@ -10,6 +10,9 @@ public class Order
     public DateTime OrderDate { get; set; } = DateTime.Now;
     public decimal TotalPrice { get; set; }
     public string OrderStatus { get; set; } = "Pending";
+    public string DeliveryAddress { get; set; } = string.Empty;
+    public string Number { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
 
     public string ItemsJson { get; set; } = string.Empty;
 }
