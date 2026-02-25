@@ -4,7 +4,7 @@ import ArrowLeftIcon from '../components/icons/ArrowLeftIcon';
 import TrashIcon from '../components/icons/TrashIcon';
 
 const CartModal = ({ onClose }) => {
-    const { items, totalPrice, setItemQuantity, removeItem } = useCart();
+    const { items, totalPrice, setItemQuantity, removeItem, activeRestaurantName } = useCart();
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
@@ -39,6 +39,12 @@ const CartModal = ({ onClose }) => {
                     </button>
                     <h2 className='text-2xl font-bold flex w-full justify-center items-center'>Din Order</h2>
                 </div>
+            </div>
+
+            <div className='pb-4'>
+                <h2 className='text-xl font-semibold'>{activeRestaurantName}</h2>
+                {/* hardcoded for now, will build a delivery time estimator later*/}
+                <p className='text-gray-400 text-[14px]'>Estimerad leverans 20-30 min</p> 
             </div>
 
             {items.length === 0 ? (
@@ -79,21 +85,18 @@ const CartModal = ({ onClose }) => {
                                         </button>
                                     </div>
                                 </div>
-                                <p className='text-green-600 font-semibold'>{item.price * item.quantity}kr</p>
+                                <p className='text-black font-semibold'>{item.price * item.quantity}kr</p>
                             </div>
                         ))}
                     </div>
 
-                    <div>
-                        <div className='border-t-2 border-gray-300 py-4'>
-                            <div className='flex justify-between items-center'>
-                                <span className='text-lg font-semibold'>Totalt:</span>
-                                <span className='text-2xl font-bold text-green-600'>{totalPrice}kr</span>
-                            </div>
-                        </div>
+                    <div className="border-t border-gray-300 py-4">
 
-                        <button className='w-full bg-red-400 text-white py-3 rounded-full font-semibold hover:bg-red-500 transition'>
-                            Gå till checkout
+                        <button className='w-full bg-red-400 text-white py-3 rounded-full font-semibold hover:bg-red-500 transition
+                            flex justify-between items-center px-6
+                        '>
+                            <span>Gå till checkout</span>
+                            <span className='border-l pl-4 text-xl font-bold text-white'>{totalPrice}kr</span>
                         </button>
                     </div>
 

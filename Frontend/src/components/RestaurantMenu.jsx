@@ -15,7 +15,7 @@ const RestaurantMenu = () => {
     const [error, setError] = useState(null);
 
     const addToCart = (item) => {
-        const result = addItem(item, id);
+        const result = addItem(item, id, restaurant?.name);
         if (result === false) {
             setError("Du har redan varor i din kundvagn från en annan restaurang. Rensa kundvagnen för att fortsätta.");
             setTimeout(() => setError(null), 4000);
@@ -135,7 +135,9 @@ const RestaurantMenu = () => {
                 </div>
 
                 {showCart && (
-                    <CartModal onClose={() => setShowCart(false)} />
+                    <CartModal 
+                        onClose={() => setShowCart(false)}
+                    />
                 )}
             </div>
         </>

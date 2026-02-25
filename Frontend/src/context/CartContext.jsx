@@ -24,13 +24,23 @@ export const CartProvider = ({ children }) => {
         }
     })
 
-    const addItem = (item, restaurantId) => {
+    const [activeRestaurantName, setActiveRestaurantName] = useState(() => {
+        try {
+            const saved = localStorage.getItem("cart");
+            return saved ? (JSON.parse(saved).activeRestaurantName || null) : null;
+        } catch {
+            return null;
+        }
+    });
+
+    const addItem = (item, restaurantId, restaurantName) => {
         if (activeRestaurantId && activeRestaurantId !== restaurantId) {
             return false;
         }
 
         if (!activeRestaurantId) {
             setActiveRestaurantId(restaurantId);
+            setActiveRestaurantName(restaurantName);
         }
 
         const key = `${restaurantId}:${item.id}`;
@@ -49,22 +59,37 @@ export const CartProvider = ({ children }) => {
     };
 
     const removeItem = (key) => {
-        setItems((prevItems) => prevItems.filter((item) => item.key !== key));
+        setItems((prevItems) => {
+            const newItems = prevItems.filter((item) => item.key !== key);
+            if (newItems.length === 0) {
+                setActiveRestaurantId(null);
+                setActiveRestaurantName(null);
+            }
+            return newItems;
+        });
     };
 
     const clearCart = () => {
         setItems([]);
         setActiveRestaurantId(null);
+        setActiveRestaurantName(null);
     };
 
     const setItemQuantity = (key, quantity) => {
-        setItems((prev) =>
-            quantity <= 0
+        setItems((prev) => {
+            const newItems = quantity <= 0
                 ? prev.filter((item) => item.key !== key)
                 : prev.map((item) =>
-                      item.key === key ? { ...item, quantity } : item,
-                  ),
-        );
+                    item.key === key ? { ...item, quantity } : item,
+                );
+            
+            if (newItems.length === 0) {
+                setActiveRestaurantId(null);
+                setActiveRestaurantName(null);
+            }
+            
+            return newItems;
+        });
     };
 
     const totals = useMemo(() => {
@@ -77,8 +102,8 @@ export const CartProvider = ({ children }) => {
     }, [items]);
 
     useEffect(() =>  {
-        localStorage.setItem("cart", JSON.stringify({ items, activeRestaurantId }));
-    }, [items, activeRestaurantId]);
+        localStorage.setItem("cart", JSON.stringify({ items, activeRestaurantId, activeRestaurantName }));
+    }, [items, activeRestaurantId, activeRestaurantName]);
 
     return (
         <CartContext.Provider
@@ -90,6 +115,7 @@ export const CartProvider = ({ children }) => {
                 setItemQuantity,
                 ...totals,
                 activeRestaurantId,
+                activeRestaurantName,
             }}
         >
             {children}
