@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import RestaurantList from '../components/RestaurantList'
+import AddressModal from '../components/AddressModal'
 
 import avatarIcon from '../assets/avatar.svg'
 import SearchIcon from '../components/icons/SearchIcon'
@@ -19,15 +20,27 @@ const Discovery = () => {
         setTimeout(() => setIsLoading(false), 500);
     }
 
+    const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
+    const [address, setAddress] = useState(() => {
+        return localStorage.getItem('deliveryAddress') || '4517 Washington Ave';
+    });
+
+    const handleSaveAddress = (newAddress) => {
+        setAddress(newAddress);
+        localStorage.setItem('deliveryAddress', newAddress);
+    };
+
   return (
     <div className='min-h-screen flex flex-col bg-gray-200/50'>
 
         <div className='bg-white p-4'>
             <div className='w-full flex justify-between pb-5'>
-                <div>
+                <button className='flex flex-col items-start'
+                    onClick={() => setIsAddressModalOpen(true)}
+                >
                     <p className='text-sm font-semibold text-slate-500'>DELIVER TO</p>
-                    <p className='text-md font-semibold text-slate-700'>4517 Washington Ave</p>
-                </div>
+                    <p className='text-md font-semibold text-slate-700'>{address}</p>
+                </button>
 
                 <div className='bg-gray-100 rounded-full w-11 h-11 justify-center items-center flex border border-slate-300'>
                     <img src={avatarIcon} alt="User Avatar" className='w-6 h-6'/>
@@ -53,7 +66,7 @@ const Discovery = () => {
             {isLoading ? (
                 <div className='flex justify-center items-center py-12'> 
                     <div className='flex justify-center items-center py-12'>
-                        <GoIcon className="w-40 h-auto animate-ping" />
+                        <GoIcon className="w-20 h-auto animate-spin [animation-duration:1s]" />
                     </div>
                 </div>
             ) : (
@@ -64,6 +77,13 @@ const Discovery = () => {
         </main>
 
         <BottomNav />
+
+        <AddressModal 
+            isOpen={isAddressModalOpen}
+            onClose={() => setIsAddressModalOpen(false)}
+            currentAddress={address}
+            onSave={handleSaveAddress}
+        />
     </div>
   )
 }
