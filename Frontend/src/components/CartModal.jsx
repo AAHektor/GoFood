@@ -5,7 +5,7 @@ import TrashIcon from '../components/icons/TrashIcon';
 import OrderConfirmation from './OrderConfirmation';
 
 const CartModal = ({ onClose }) => {
-    const { items, totalPrice, setItemQuantity, removeItem, activeRestaurantName, clearCart } = useCart();
+    const { items, totalPrice, setItemQuantity, removeItem, activeRestaurantName, activeRestaurantId, clearCart } = useCart();
     const [isOpen, setIsOpen] = useState(false);
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
@@ -61,7 +61,7 @@ const CartModal = ({ onClose }) => {
         try {
             const order = {
                 userId: 1,
-                restaurantId: 1,
+                restaurantId: activeRestaurantId,
                 totalPrice: totalPrice + deliveryFee + serviceFee,
                 orderStatus: "Pending",
                 name: name,

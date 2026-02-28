@@ -28,10 +28,31 @@ namespace backend.Controllers
             return Ok(order);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
+        [HttpGet] 
+        public async Task<ActionResult> GetOrders()
         {
-            return await _context.Orders.ToListAsync();
+            var orders = await _context.Orders
+            .OrderByDescending(o => o.OrderDate)
+            .Select(o => new
+            {
+                o.Id,
+                o.UserId,
+                o.RestaurantId,
+                RestaurantName = _context.Restaurants
+                .Where(r => r.Id == o.RestaurantId)
+                .Select(r => r.Name)
+                .FirstOrDefault(),
+                o.OrderDate,
+                o.TotalPrice,
+                o.OrderStatus,
+                o.DeliveryAddress,
+                o.Number,
+                o.Name,
+                o.ItemsJson
+            })
+            .ToListAsync();
+
+            return Ok(orders);
         }
     }
 }

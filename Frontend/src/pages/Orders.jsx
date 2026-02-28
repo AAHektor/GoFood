@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import BottomNav from '../components/BottomNav'
 
 const Orders = () => {
     const [orders, setOrders] = useState([]);
@@ -42,19 +43,19 @@ const Orders = () => {
             <h1 className='font-semibold text-xl'>Dina Beställningar</h1>
         </div>
 
-        <div className='p-4 space-y-3'>
+        <div className='p-4 space-y-3 pb-20'>
             {loading ? (
                 <p>Laddar beställningar...</p>
             ) : orders.length === 0 ? (
                 <p>Du har inga beställningar än.</p>
             ) : (
                 orders.map(order => {
-                    const items = parseItems(order.items);
+                    const items = parseItems(order.itemsJson);
                     return (
                         <div key={order.id} className='bg-white rounded-lg shadow p-4'>
                             <div className='flex justify-between items-center mb-2'>
                                 <h2 className='font-semibold text-lg'>{order.restaurantName}</h2>
-                                <span className='text-sm text-gray-500'>{formatData(order.createdAt)}</span>
+                                <span className='text-sm text-gray-500'>{formatData(order.orderDate)}</span>
                             </div>
                             <div className='space-y-1'>
                                 {items.map((item, index) => (
@@ -72,6 +73,7 @@ const Orders = () => {
                 })
             )}
         </div>
+        <BottomNav />
     </div>
   )
 }
