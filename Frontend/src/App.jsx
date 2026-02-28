@@ -3,6 +3,7 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import RestaurantMenu from './components/RestaurantMenu'
 import Discovery from './pages/Discovery'
+import Orders from './pages/Orders'
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
             <Routes>
                 <Route path='/' element={<Discovery />} />
                 <Route path='/restaurant/:id' element={<RestaurantMenu />} />
+                <Route path='/orders' element={<Orders />} />
             </Routes>
         </main>
     </div>
