@@ -64,11 +64,11 @@ const Orders = () => {
                                     className='h-15 w-15 object-cover rounded-lg'
                                     src={order.restaurantImageUrl} alt="" />
                                 </div>
-                                <div>
+                                <div className='flex flex-col'>
                                     <h2 className='font-semibold text-lg'>{order.restaurantName}</h2>
-                                    <div className='flex gap-2'>
+                                    <div className='flex gap-2 justify-center items-center text-gray-500'>
                                         <span className='text-sm text-gray-500'>{formatData(order.orderDate)}</span>
-                                         * {itemCount} {itemCount === 1 ? 'vara' : 'varor'}
+                                        <span className='text-sm text-gray-500'>• {itemCount} {itemCount === 1 ? 'vara' : 'varor'}</span>
                                     </div>
                                 </div>
                             </div>
