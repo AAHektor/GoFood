@@ -75,7 +75,10 @@ const Orders = () => {
                             <div className='space-y-1'>
                             </div>
                             <div className='border-t border-gray-300 mt-2 pt-2 flex justify-between items-center'>
-                                <span className='font-semibold'>{order.totalPrice}kr</span>
+                                <div className='flex flex-col'>
+                                    <span className='text-gray-500'>Total:</span>
+                                    <span className='font-semibold'>{order.totalPrice}kr</span>
+                                </div>
                                 <button className='bg-red-600/70 text-lg text-white font-semibold rounded-2xl px-4 py-1 shadow shadow-red-300'>Beställ</button>
                             </div>
                         </div>
