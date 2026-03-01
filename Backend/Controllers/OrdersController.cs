@@ -42,6 +42,10 @@ namespace backend.Controllers
                 .Where(r => r.Id == o.RestaurantId)
                 .Select(r => r.Name)
                 .FirstOrDefault(),
+                RestaurantImageUrl = _context.Restaurants
+                .Where(r => r.Id == o.RestaurantId)
+                .Select(r => r.ImageUrl)
+                .FirstOrDefault(),
                 o.OrderDate,
                 o.TotalPrice,
                 o.OrderStatus,

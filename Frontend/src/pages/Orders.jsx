@@ -36,6 +36,10 @@ const Orders = () => {
         }
     }
 
+    const getTotalItemCount = (items) => {
+        return items.reduce((total, item) => total + item.quantity, 0);
+    }
+
 
   return (
     <div className='min-h-screen flex flex-col bg-gray-200/50'>
@@ -51,22 +55,28 @@ const Orders = () => {
             ) : (
                 orders.map(order => {
                     const items = parseItems(order.itemsJson);
+                    const itemCount = getTotalItemCount(items);
                     return (
                         <div key={order.id} className='bg-white rounded-lg shadow p-4'>
-                            <div className='flex justify-between items-center mb-2'>
-                                <h2 className='font-semibold text-lg'>{order.restaurantName}</h2>
-                                <span className='text-sm text-gray-500'>{formatData(order.orderDate)}</span>
+                            <div className='flex justify-start mb-2 gap-4'>
+                                <div className=''>
+                                    <img 
+                                    className='h-15 w-15 object-cover rounded-lg'
+                                    src={order.restaurantImageUrl} alt="" />
+                                </div>
+                                <div>
+                                    <h2 className='font-semibold text-lg'>{order.restaurantName}</h2>
+                                    <div className='flex gap-2'>
+                                        <span className='text-sm text-gray-500'>{formatData(order.orderDate)}</span>
+                                         * {itemCount} {itemCount === 1 ? 'vara' : 'varor'}
+                                    </div>
+                                </div>
                             </div>
                             <div className='space-y-1'>
-                                {items.map((item, index) => (
-                                    <div key={index} className='flex justify-between text-sm'>
-                                        <span>{item.name} x{item.quantity}</span>
-                                        <span>{item.price * item.quantity}kr</span>
-                                    </div>
-                                ))}
                             </div>
-                            <div className='border-t mt-2 pt-2 flex justify-end'>
+                            <div className='border-t border-gray-300 mt-2 pt-2 flex justify-between items-center'>
                                 <span className='font-semibold'>{order.totalPrice}kr</span>
+                                <button className='bg-red-600/70 text-lg text-white font-semibold rounded-2xl px-4 py-1 shadow shadow-red-300'>Beställ</button>
                             </div>
                         </div>
                     )

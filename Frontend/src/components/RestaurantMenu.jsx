@@ -10,7 +10,8 @@ import AddToCartIcon from "../components/icons/AddToCartIcon";
 const RestaurantMenu = () => {
     const [showCart, setShowCart] = useState(true);
     const { id } = useParams();
-    const { addItem, clearCart, totalItems, totalPrice, activeRestaurantName } = useCart();
+    const { addItem, clearCart, totalItems, totalPrice, activeRestaurantName } =
+        useCart();
     const [menuItems, setMenuItems] = useState([]);
     const [restaurant, setRestaurant] = useState(null);
 
@@ -23,7 +24,6 @@ const RestaurantMenu = () => {
             setPendingItem(item);
             setShowConfirmSwitch(true);
         }
-        
     };
 
     useEffect(() => {
@@ -72,7 +72,8 @@ const RestaurantMenu = () => {
                 <div className="relative h-64 w-full overflow-hidden">
                     <img
                         src={
-                            restaurant?.imageUrl && restaurant.imageUrl.length > 10
+                            restaurant?.imageUrl &&
+                            restaurant.imageUrl.length > 10
                                 ? restaurant.imageUrl
                                 : "https://worldfoodtour.co.uk/wp-content/uploads/2013/06/neptune-placeholder-48.jpg"
                         }
@@ -132,7 +133,6 @@ const RestaurantMenu = () => {
                                             </button>
                                         </div>
                                     </div>
-                                    
                                 </div>
                             ))
                         )}
@@ -140,20 +140,21 @@ const RestaurantMenu = () => {
                 </div>
 
                 <div className="fixed z-15 bottom-4 left-1/2 -translate-x-1/2 px-4 w-full">
-                    <button 
-                    onClick={() => setShowCart(true)}
-                    className="w-full text-white bg-red-400 h-12 rounded-full font-semibold justify-between flex px-6 items-center">
-                        <span className="rounded-full h-8 w-8 justify-center items-center flex bg-red-500">{totalItems}</span>
+                    <button
+                        onClick={() => setShowCart(true)}
+                        className="w-full text-white bg-red-400 h-12 rounded-full font-semibold justify-between flex px-6 items-center"
+                    >
+                        <span className="rounded-full h-8 w-8 justify-center items-center flex bg-red-500">
+                            {totalItems}
+                        </span>
                         <span>Min Order</span>
-                        <span className="border-l pl-4 text-xl font-bold text-white">{totalPrice}kr</span>
+                        <span className="border-l pl-4 text-xl font-bold text-white">
+                            {totalPrice}kr
+                        </span>
                     </button>
                 </div>
 
-                {showCart && (
-                    <CartModal 
-                        onClose={() => setShowCart(false)}
-                    />
-                )}
+                {showCart && <CartModal onClose={() => setShowCart(false)} />}
             </div>
         </>
     );
