@@ -47,7 +47,7 @@ const Orders = () => {
             <h1 className='font-semibold text-xl'>Dina Beställningar</h1>
         </div>
 
-        <div className='p-4 space-y-3 pb-20'>
+        <div className='p-4 space-y-4 pb-20'>
             {loading ? (
                 <p>Laddar beställningar...</p>
             ) : orders.length === 0 ? (
@@ -57,11 +57,11 @@ const Orders = () => {
                     const items = parseItems(order.itemsJson);
                     const itemCount = getTotalItemCount(items);
                     return (
-                        <div key={order.id} className='bg-white rounded-lg shadow p-4'>
+                        <div key={order.id} className='bg-white rounded-3xl shadow p-4'>
                             <div className='flex justify-start mb-2 gap-4'>
                                 <div className=''>
                                     <img 
-                                    className='h-15 w-15 object-cover rounded-lg'
+                                    className='h-15 w-15 object-cover rounded-2xl'
                                     src={order.restaurantImageUrl} alt="" />
                                 </div>
                                 <div className='flex flex-col'>
@@ -72,9 +72,7 @@ const Orders = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className='space-y-1'>
-                            </div>
-                            <div className='border-t border-gray-300 mt-2 pt-2 flex justify-between items-center'>
+                            <div className='border-t border-gray-100 mt-2 pt-2 flex justify-between items-center'>
                                 <div className='flex flex-col'>
                                     <span className='text-gray-500'>Total:</span>
                                     <span className='font-semibold'>{order.totalPrice}kr</span>
