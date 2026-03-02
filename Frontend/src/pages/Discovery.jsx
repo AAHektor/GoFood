@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import RestaurantList from '../components/RestaurantList'
 import AddressModal from '../components/AddressModal'
 
@@ -8,11 +8,21 @@ import QuickFilter from '../components/QuickFilter'
 import BottomNav from '../components/BottomNav'
 import FilterIcon from '../components/icons/FilterIcon'
 import GoIcon from '../components/icons/GoIcon'
+import { useSearchParams } from 'react-router-dom'
 
 const Discovery = () => {
+    const [searchParams] = useSearchParams();
+    const searchInputRef = useRef(null);
 
     const [activeCategory, setActiveCategory] = useState('popular');
     const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        if (searchParams.get('focus') === 'search' && searchInputRef.current) {
+            searchInputRef.current.focus();
+        }
+    }, [searchParams]);
+    
 
     const handleCategoryChange = (category) => {
         setIsLoading(true);
@@ -59,7 +69,7 @@ const Discovery = () => {
                 <div className='items-center w-6 h-6 mr-5'>
                     <SearchIcon className="w-full h-full text-green-700" />
                 </div>
-                <input type="text" placeholder='Vad vill du äta?'className='bg-transparent outline-none w-full text-gray-700 placeholder-green-900/60'/>
+                <input ref={searchInputRef} type="text" placeholder='Vad vill du äta?'className='bg-transparent outline-none w-full text-gray-700 placeholder-green-900/60'/>
                 <button className=''>
                     <FilterIcon className="w-6 h-6 relative right-2 text-gray-500" />
                 </button>

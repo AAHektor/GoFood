@@ -17,7 +17,7 @@ const BottomNav = () => {
                 <span className='flex justify-center items-center'> <HomeIcon className="w-5 h-5" /> </span>
                 <span>Home</span>
             </Link>
-            <Link to="/" className={`text-xs flex flex-col gap-1.5 ${isActive('/browse') ? 'text-green-500' : 'text-gray-400' }`}>
+            <Link to="/?focus=search" className={`text-xs flex flex-col gap-1.5 ${isActive('/browse') ? 'text-green-500' : 'text-gray-400' }`}>
                 <span className='flex justify-center items-center'> <SearchIcon className="w-5 h-5" /> </span>
                 <span>Browse</span>
             </Link>
